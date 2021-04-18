@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Task登録</title>
+</head>
+<body>
+    <h1>Task登録</h1>
+    <!-- ポイント1 -->
+    <form th:action="@{/task_add}" th:object="${task}" method="post">
+        <table>
+            <tr>
+                <th>id</th>
+                <td><input type="text" name="id" th:field="*{id}"></td>
+            </tr>
+            <tr>
+                <th>タイトル</th>
+                <td><input type="text" name="title" th:field="*{title}"></td>
+            </tr>
+            <tr>
+                <th>ステータス</th>
+                <td>
+                    <select name="status">
+                        <option th:value="New" th:field="*{status}">New</option>
+                        <option th:value="Working" th:field="*{status}">Working</option>
+                        <option th:value="Completed" th:field="*{status}">Completed</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>メモ</th>
+                <td><input type="text" name="memo" th:field="*{memo}"></td>
+            </tr>
+        </table>
+        <input type="submit" value="登録">
+    </form>
+</body>
+</html>

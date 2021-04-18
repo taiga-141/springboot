@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
+<title>task編集</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-5">task編集</h1>
+        <form th:action="@{/task_edit}" th:object="${task}" method="post">
+            <table class="table table-bordered table-hover col-6">
+                <tr class="form-group">
+                    <th class="align-middle">id</th>
+                    <td><input type="text" class="form-control" name="id" th:field="*{id}" th:classappend="${#fields.hasErrors('id')} ? 'is-invalid'"><span class="text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span></td>
+                </tr>
+                <tr class="form-group">
+                    <th class="align-middle">タイトル</th>
+                    <td><input type="text" class="form-control" name="title" th:field="*{title}" th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'"><span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span></td>
+                </tr>
+                <tr class="form-group">
+                    <th class="align-middle">ステータス</th>
+                    <td>
+                        <select name="status">
+                            <option th:value="New" th:field="*{status}">New</option>
+                            <option th:value="Working" th:field="*{status}">Working</option>
+                            <option th:value="Completed" th:field="*{status}">Completed</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="form-group">
+                    <th>メモ</th>
+                    <td><input type="text" class="form-control" name="memo" th:field="*{memo}" th:classappend="${#fields.hasErrors('memo')} ? 'is-invalid'"><span class="text-danger" th:if="${#fields.hasErrors('memo')}" th:errors="*{memo}"></span></td>
+                </tr>
+            </table>
+            <input type="submit" class="btn btn-outline-dark mt-3" name="back" value="戻る">
+            <input type="submit" class="btn btn-primary mt-3" name="regist" value="実行">
+            <!---------- ポイント1 ---------->
+            <input type="hidden" name="task_id" th:value="${param.task_id[0]}">
+        </form>
+    </div>
+    <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

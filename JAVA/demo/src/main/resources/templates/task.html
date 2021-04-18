@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>task一覧</title>
+</head>
+<body>
+    <h1>todoアプリ</h1>
+    <a th:href="@{/task_add}">顧客登録</a>
+    <table>
+        <tr>
+            <th>title</th>
+            <th>status</th>
+            <th>memo</th>
+            <th colspan="2">編集</th>
+        </tr>
+        <!-- ポイント1 -->
+        <tr th:each="todo : ${todos}">
+            <!-- ポイント2 -->
+            <td th:text="${todo.title}"></td>
+            <td th:text="${todo.status}"></td>
+            <td th:text="${todo.memo}"></td>
+            <td>
+                <form th:action="@{/task_edit}" method="post">
+                    <input type="submit" class="btn btn-outline-primary" name="edit" value="編集">
+                    <!-- ポイント1 -->
+                    <input type="hidden" name="task_id" th:value="${todo.taskId}">
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/task_edit}" method="post">
+                    <input type="submit" class="btn btn-outline-danger" name="delete" value="削除">
+                    <input type="hidden" name="task_id" th:value="${todo.taskId}">
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
